@@ -1,0 +1,33 @@
+#!/bin/bash
+GOODCODE="green"
+OKCODE="yellow"
+BADCODE="red"
+GOOD="#[fg=$GOODCODE]"
+OK="#[fg=$OKCODE]"
+BAD="#[fg=$BADCODE]"
+
+battery_info() {
+    ioreg -n AppleSmartBattery -r | \
+    grep -o '"[^"]*" = [^ ]*' | \
+    sed -e 's/= //g' -e 's/"//g' | \
+    sort
+}
+
+battery_external_connected() {
+    battery_info | grep "ExternalConnected" | cut -f2 -d' '
+}
+
+BATLEVEL="$(pmset -g batt | grep -o '[0-9]*%' | tr -d %)"
+BATLEVELLINE="$(spark 0 ${BATTERY_STATUS} 100 | awk '{print substr($0,4,3)}')"
+if [[ ! $(battery_external_connected) = "No" ]]; then
+    BATLEVELLINE="="
+fi
+
+COLOR=$BAD
+if [[ $BATLEVEL -ge 75 ]]; then
+    COLOR=$GOOD
+elif [[ $BATLEVEL -ge 25 ]]; then
+    COLOR=$OK
+fi
+echo -e "${COLOR}[$BATLEVEL%] $BATLEVELLINE#[default]"
+#echo -e "${GOOD}[87%] $(echo 0 87 100 | spark | awk '{print substr($1, 2, 1)}') ${OK}[68%] $(echo 0 68 100 | spark | awk '{print substr($1, 2, 1)}') ${BAD}[15%] $(echo 0 15 100 | spark | awk '{print substr($1, 2, 1)}') #[default]"
