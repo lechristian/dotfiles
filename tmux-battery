@@ -1,4 +1,5 @@
 #!/bin/bash
+
 GOODCODE="green"
 OKCODE="yellow"
 BADCODE="red"
@@ -30,4 +31,4 @@ elif [[ $BATLEVEL -ge 25 ]]; then
     COLOR=$OK
 fi
 echo -e "${COLOR}[$BATLEVEL%] $BATLEVELLINE#[default]"
-#echo -e "${GOOD}[87%] $(echo 0 87 100 | spark | awk '{print substr($1, 2, 1)}') ${OK}[68%] $(echo 0 68 100 | spark | awk '{print substr($1, 2, 1)}') ${BAD}[15%] $(echo 0 15 100 | spark | awk '{print substr($1, 2, 1)}') #[default]"
+

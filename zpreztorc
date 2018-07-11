@@ -1,0 +1,26 @@
+# Color output (auto set to 'no' on dumb terminals).
+zstyle ':prezto:*:*' color 'yes'
+
+# Load modules
+zstyle ':prezto:load' pmodule \
+  'environment' \
+  'terminal' \
+  'editor' \
+  'history' \
+  'history-substring-search' \
+  'directory' \
+  'spectrum' \
+  'completion' \
+  'git' \
+  'syntax-highlighting' \
+  'tmux' \
+  'utility' \
+  'prompt'
+
+zstyle ':prezto:module:editor' key-bindings 'vi'
+
+zstyle ':prezto:module:prompt' theme 'paradox'
+
+# Auto switch the Python virtualenv on directory change.
+zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
+
