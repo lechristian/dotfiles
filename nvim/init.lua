@@ -119,12 +119,12 @@ local function whitespace_filetype()
 	end
 end
 
-local function whitespace_term_open()
-	whitespace.nohighlight()
-end
-
 local function whitespace_buf_enter()
-	if vim.tbl_contains(whitespace.ignored_filetypes, vim.bo.filetype) or (vim.bo.buftype == "terminal") then
+	if
+		vim.tbl_contains(whitespace.ignored_filetypes, vim.bo.filetype)
+		or (vim.bo.buftype == "terminal")
+		or (vim.bo.buftype == "" and vim.bo.filetype == "")
+	then
 		whitespace.nohighlight()
 	else
 		-- vim.notify("buf", vim.log.levels.INFO)
@@ -134,10 +134,14 @@ local function whitespace_buf_enter()
 	end
 end
 
+local function whitespace_nohighlight()
+	whitespace.nohighlight()
+end
+
 vim.api.nvim_create_augroup("whitespace_nvim", { clear = true })
 vim.api.nvim_create_autocmd("FileType", { group = "whitespace_nvim", pattern = "*", callback = whitespace_filetype })
-vim.api.nvim_create_autocmd("TermOpen", { group = "whitespace_nvim", pattern = "*", callback = whitespace_term_open })
 vim.api.nvim_create_autocmd("BufEnter", { group = "whitespace_nvim", pattern = "*", callback = whitespace_buf_enter })
+vim.api.nvim_create_autocmd("TermOpen", { group = "whitespace_nvim", pattern = "*", callback = whitespace_nohighlight })
 
 vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("trim_whitespaces", { clear = true }),
