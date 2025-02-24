@@ -113,8 +113,8 @@ local function whitespace_filetype()
 	if vim.tbl_contains(whitespace.ignored_filetypes, vim.bo.filetype) then
 		whitespace.nohighlight()
 	else
-		vim.notify("filetype", vim.log.levels.INFO)
-		vim.notify(vim.bo.filetype, vim.log.levels.INFO)
+		-- vim.notify("filetype", vim.log.levels.INFO)
+		-- vim.notify(vim.bo.filetype, vim.log.levels.INFO)
 		whitespace.highlight()
 	end
 end
@@ -127,9 +127,9 @@ local function whitespace_buf_enter()
 	if vim.tbl_contains(whitespace.ignored_filetypes, vim.bo.filetype) or (vim.bo.buftype == "terminal") then
 		whitespace.nohighlight()
 	else
-		vim.notify("buf", vim.log.levels.INFO)
-		vim.notify(vim.bo.filetype, vim.log.levels.INFO)
-		vim.notify(vim.bo.buftype, vim.log.levels.INFO)
+		-- vim.notify("buf", vim.log.levels.INFO)
+		-- vim.notify(vim.bo.filetype, vim.log.levels.INFO)
+		-- vim.notify(vim.bo.buftype, vim.log.levels.INFO)
 		whitespace.highlight()
 	end
 end
