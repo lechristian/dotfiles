@@ -84,6 +84,8 @@ local whitespace = {
 		"fzflua-backdrop",
 		"help",
 		"lazy",
+		"mason",
+		"mason-backdrop",
 		"neo-tree",
 		"nofile",
 		"noice",
