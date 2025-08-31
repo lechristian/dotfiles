@@ -182,3 +182,15 @@ end, { remap = true })
 vim.keymap.set("n", "<leader>l", function()
 	hop.hint_lines_skip_whitespace()
 end, { remap = true })
+
+----------------------------------------------------------------------------------------------------
+-- Bufdelete
+----------------------------------------------------------------------------------------------------
+vim.keymap.set("n", "<leader>q", function()
+	-- Check if the Snacks global is available before calling it
+	if _G.Snacks and _G.Snacks.bufdelete then
+		_G.Snacks.bufdelete()
+	else
+		print("Snacks.bufdelete() not available")
+	end
+end, { desc = "Close buffer (Snacks)" })
